@@ -14,5 +14,8 @@ VOLUME /etc/transmission-daemon
 VOLUME /var/lib/transmission-daemon
 
 EXPOSE 9091
+EXPOSE 51413
+EXPOSE 51413/udp
+
 CMD ["/usr/bin/transmission-daemon", "-f", "-g", "/etc/transmission-daemon"]
 
