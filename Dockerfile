@@ -11,7 +11,7 @@ RUN apt-get clean
 RUN sed -i "s/127.0.0.1/*.*.*.*/" /etc/transmission-daemon/settings.json
 
 VOLUME /etc/transmission-daemon
-VOLUME /var/lib/transmission-daemon
+VOLUME /var/lib/transmission-daemon/downloads
 
 EXPOSE 9091
 EXPOSE 51413
