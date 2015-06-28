@@ -1,12 +1,9 @@
 # transmission-daemon debian-based container
-# VERSION               0.1
-FROM debian
+# VERSION               0.2
+FROM debian:jessie
 MAINTAINER Davide Lucchesi  "davide@lucchesi.nl"
 
-RUN apt-get update
-RUN apt-get dist-upgrade -y -q
-RUN apt-get install -y -q transmission-daemon
-RUN apt-get clean
+RUN apt-get update && apt-get install -y -q transmission-daemon
 
 RUN sed -i "s/127.0.0.1/*.*.*.*/" /etc/transmission-daemon/settings.json
 
