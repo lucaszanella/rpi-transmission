@@ -1,16 +1,28 @@
-docker.transmission
+Transmission Daemon
 ===================
 
-Very light **transmission-daemon** installation fully based on the Debian packages.
+Very light **transmission-daemon** installation based on the Hypriot image for
+the Raspberry Pi.
 
-By design, it will only run the **transission** daemon, exposing its standard port and exporting volumes for both the *configuration* and the *data* (including download) directories.
+By design, it will only run the **transission** daemon, exposing its standard
+port and exporting volumes for both the *configuration* and the *data*
+(including download) directories.
 
 You can execute it with something like:
 
-    docker run -d -P --name transmission odiobill/transmission
+```
+docker run -d \
+  -p  9091:9091 \
+  -p  51413:51413 \
+  -p  51413:51413/udp \
+  --restart='always' \
+  -v /media/external/torrent/downloading:/var/lib/transmission-daemon/downloads \
+  -v /root/transmission-daemon:/etc/transmission-daemon \
+  --name transmission robsharp/rpi-transmission \
+```
 
-Be aware that the default configuration allows connection by any IP address and with the default username/password pair, both set to *transmission*.
-To change this, you may want to run another (temporary) container that imports its volumes. Run it with:
+In my case, `/media/external` represents an external drive mounted on the docker
+host, and `/root/transmission-daemon` contains all the settings and in-progress
+torrents for the container.
 
-    docker run -i -t --name config_transmission --volumes-from transmission odiobill/transmission bash
-
+The use of `restart='always'` ensures the container starts with the docker host.
