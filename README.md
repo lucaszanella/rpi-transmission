@@ -8,6 +8,12 @@ By design, it will only run the **transission** daemon, exposing its standard
 port and exporting volumes for both the *configuration* and the *data*
 (including download) directories.
 
+# Build
+
+```
+sudo docker build -t rpi-transmission .
+```
+
 You can execute it with something like:
 
 ```
@@ -18,7 +24,7 @@ docker run -d \
   --restart='always' \
   -v /media/external/torrent/downloading:/var/lib/transmission-daemon/downloads \
   -v /root/transmission-daemon:/etc/transmission-daemon \
-  --name transmission robsharp/rpi-transmission \
+  --name transmission rpi-transmission
 ```
 
 In my case, `/media/external` represents an external drive mounted on the docker
