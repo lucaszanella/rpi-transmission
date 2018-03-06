@@ -14,17 +14,17 @@ port and exporting volumes for both the *configuration* and the *data*
 sudo docker build -t rpi-transmission .
 ```
 
-You can execute it with something like:
+# Run
 
 ```
 docker run -d \
   -p  9091:9091 \
   -p  51413:51413 \
   -p  51413:51413/udp \
-  --restart='always' \
-  -v /media/external/torrent/downloading:/var/lib/transmission-daemon/downloads \
-  -v /root/transmission-daemon:/etc/transmission-daemon \
-  --name transmission rpi-transmission
+  --restart unless-stopped \
+  -v /media/external:/downloads \
+  -v /home/transmission-watch:/home/transmission-watch \
+  rpi-transmission
 ```
 
 In my case, `/media/external` represents an external drive mounted on the docker
