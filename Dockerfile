@@ -1,6 +1,6 @@
 FROM resin/rpi-raspbian
 
-MAINTAINER Rob Sharp <qnm@fea.st>
+MAINTAINER Lucas Zanella <me@lucaszanella.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y -q transmission-daemon
 RUN sed -i "s/127.0.0.1/*.*.*.*/" /etc/transmission-daemon/settings.json \
  && sed -i '0,/{/a\ \ \ \ "watch-dir": "\/home\/transmission-watch",' /etc/transmission-daemon/settings.json \
  && sed -i '0,/{/a\ \ \ \ "watch-dir-enabled": "true",' /etc/transmission-daemon/settings.json \
+ && sed -i '0,/{/a\ \ \ \ "rpc-whitelist-enabled": "false",' /etc/transmission-daemon/settings.json \
  && sed -i 's/"download-dir":.*/"download-dir": "\/home\/downloads",/g' /etc/transmission-daemon/settings.json
 
 VOLUME /home/downloads
