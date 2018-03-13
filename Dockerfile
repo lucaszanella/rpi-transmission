@@ -4,7 +4,7 @@ MAINTAINER Lucas Zanella <me@lucaszanella.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y -q transmission-daemon
+RUN apt-get update && apt-get install -y transmission-daemon
 
 RUN sed -i '0,/{/a\ \ \ \ "watch-dir": "\/home\/transmission-watch",' /etc/transmission-daemon/settings.json \
  && sed -i '0,/{/a\ \ \ \ "watch-dir-enabled": "true",' /etc/transmission-daemon/settings.json \
